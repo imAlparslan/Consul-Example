@@ -1,0 +1,132 @@
+services:
+  consul:
+    image: hashicorp/consul:latest
+    container_name: consul
+    ports:
+        - "8500:8500"
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8500/v1/status/leader"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    networks: 
+     - consul-network
+   
+
+  service-a1:
+    build:
+      context: ./src/serviceA
+    container_name: service-a1
+    ports:
+      - "5011:5001"
+    depends_on:
+        consul:
+            condition: service_healthy
+    networks: 
+     - consul-network
+
+  service-a2:
+    build:
+      context: ./src/serviceA
+    ports:
+      - "5012:5001"
+    container_name: service-a2
+    depends_on:
+        consul:
+            condition: service_healthy
+    networks: 
+     - consul-network
+
+  service-a3:
+    build:
+      context: ./src/serviceA
+    ports:
+      - "5013:5001"
+    container_name: service-a3
+    depends_on:
+        consul:
+            condition: service_healthy
+    networks: 
+     - consul-network
+
+  service-b1:
+    build:
+      context: ./src/serviceB
+    container_name: service-b1
+    ports:
+      - "5021:5002"
+    depends_on:
+        consul:
+            condition: service_healthy
+    networks: 
+     - consul-network
+
+
+  service-b2:
+    build:
+      context: ./src/serviceB
+    container_name: service-b2
+    ports:
+      - "5022:5002"
+    depends_on:
+        consul:
+            condition: service_healthy
+    networks: 
+     - consul-network
+
+
+
+  service-b3:
+    build:
+      context: ./src/serviceB
+    container_name: service-b3
+    ports:
+      - "5023:5003"
+    depends_on:
+        consul:
+            condition: service_healthy
+    networks: 
+     - consul-network
+
+
+  service-c1:
+    build:
+      context: ./src/serviceC
+    container_name: service-c1
+    ports:
+      - "5031:5003"
+    depends_on:
+        consul:
+            condition: service_healthy
+    networks: 
+     - consul-network
+
+
+  service-c2:
+    build:
+      context: ./src/serviceC
+    container_name: service-c2
+    ports:
+      - "5032:5003"
+    depends_on:
+        consul:
+            condition: service_healthy
+    networks: 
+     - consul-network
+
+  service-c3:
+    build:
+      context: ./src/serviceC
+    container_name: service-c3
+    ports:
+      - "5033:5003"
+    depends_on:
+        consul:
+            condition: service_healthy
+    networks: 
+     - consul-network
+
+
+networks:
+  consul-network:
+    driver: bridge

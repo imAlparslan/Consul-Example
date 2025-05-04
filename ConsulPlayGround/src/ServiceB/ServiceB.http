@@ -1,0 +1,5 @@
+
+GET {{ServiceHost}}/service-b/info
+Accept: application/json
+
+###

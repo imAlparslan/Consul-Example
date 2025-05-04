@@ -1,0 +1,14 @@
+
+GET {{ServiceHost}}/service-a/info
+Accept: application/json
+
+###
+
+GET {{ServiceHost}}/service-a/get-info-b
+Accept: application/json
+
+###
+GET {{ServiceHost}}/service-a/get-info-c-from-b
+Accept: application/json
+
+###
