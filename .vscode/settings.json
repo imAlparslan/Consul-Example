@@ -1,0 +1,10 @@
+{
+    "rest-client.environmentVariables": {
+        "local": {
+            "ServiceHost": "http://localhost:5077"
+        },
+        "docker": {
+            "ServiceHost": "http://localhost:5011"
+        }
+    }
+}

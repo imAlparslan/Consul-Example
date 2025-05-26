@@ -22,7 +22,7 @@ public class ServiceBController : ControllerBase
     public async Task<IActionResult> GetInfoC()
     {
         HttpClient client = _httpClientFactory.CreateClient("client-c");
-        var response = await client.GetAsync("/service-c/info");
+        var response = await client.GetAsync("service-c/info");
         var result = await response.Content.ReadAsStringAsync();
 
         return Ok($"{ServiceBInfo.GetServiceInfo} --> {result}");

@@ -1,6 +1,7 @@
 services:
   consul:
     image: hashicorp/consul:latest
+    attach: false
     container_name: consul
     ports:
         - "8500:8500"
@@ -12,11 +13,12 @@ services:
     networks: 
      - consul-network
    
-
   service-a1:
     build:
       context: ./src/serviceA
     container_name: service-a1
+    environment:
+      - DOTNET_ENVIRONMENT=Docker
     ports:
       - "5011:5001"
     depends_on:
@@ -28,6 +30,8 @@ services:
   service-a2:
     build:
       context: ./src/serviceA
+    environment:
+      - DOTNET_ENVIRONMENT=Docker
     ports:
       - "5012:5001"
     container_name: service-a2
@@ -40,6 +44,8 @@ services:
   service-a3:
     build:
       context: ./src/serviceA
+    environment:
+      - DOTNET_ENVIRONMENT=Docker
     ports:
       - "5013:5001"
     container_name: service-a3
@@ -52,6 +58,8 @@ services:
   service-b1:
     build:
       context: ./src/serviceB
+    environment:
+      - DOTNET_ENVIRONMENT=Docker
     container_name: service-b1
     ports:
       - "5021:5002"
@@ -65,6 +73,8 @@ services:
   service-b2:
     build:
       context: ./src/serviceB
+    environment:
+      - DOTNET_ENVIRONMENT=Docker
     container_name: service-b2
     ports:
       - "5022:5002"
@@ -79,6 +89,8 @@ services:
   service-b3:
     build:
       context: ./src/serviceB
+    environment:
+      - DOTNET_ENVIRONMENT=Docker
     container_name: service-b3
     ports:
       - "5023:5003"
@@ -92,6 +104,8 @@ services:
   service-c1:
     build:
       context: ./src/serviceC
+    environment:
+      - DOTNET_ENVIRONMENT=Docker
     container_name: service-c1
     ports:
       - "5031:5003"
@@ -105,6 +119,8 @@ services:
   service-c2:
     build:
       context: ./src/serviceC
+    environment:
+      - DOTNET_ENVIRONMENT=Docker
     container_name: service-c2
     ports:
       - "5032:5003"
@@ -117,6 +133,8 @@ services:
   service-c3:
     build:
       context: ./src/serviceC
+    environment:
+      - DOTNET_ENVIRONMENT=Docker
     container_name: service-c3
     ports:
       - "5033:5003"

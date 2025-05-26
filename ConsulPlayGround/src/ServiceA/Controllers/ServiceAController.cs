@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Net.Http;
 
 namespace ServiceA.Controllers;
 
@@ -8,10 +7,12 @@ namespace ServiceA.Controllers;
 public class ServiceAController : ControllerBase
 {
     private readonly IHttpClientFactory _httpClientFactory;
+    private readonly ILogger<ServiceAController> _logger;
 
-    public ServiceAController(IHttpClientFactory httpClientFactory)
+    public ServiceAController(IHttpClientFactory httpClientFactory, ILogger<ServiceAController> logger)
     {
         _httpClientFactory = httpClientFactory;
+        _logger = logger;
     }
 
     [HttpGet("info")]
@@ -24,8 +25,10 @@ public class ServiceAController : ControllerBase
     public async Task<IActionResult> GetInfoFromB()
     {
         HttpClient client = _httpClientFactory.CreateClient("client-b");
-        var response = await client.GetAsync("/service-b/info");
+        _logger.LogInformation(client.BaseAddress!.ToString());
+        var response = await client.GetAsync("service-b/info");
         var result = await response.Content.ReadAsStringAsync();
+        _logger.LogInformation(result);
         return Ok(result);
     }
 
@@ -33,7 +36,7 @@ public class ServiceAController : ControllerBase
     public async Task<IActionResult> GetInfoCFromB()
     {
         HttpClient client = _httpClientFactory.CreateClient("client-b");
-        var response = await client.GetAsync("/service-b/get-info-c");
+        var response = await client.GetAsync("service-b/get-info-c");
         var result = await response.Content.ReadAsStringAsync();
         return Ok(result);
     }
