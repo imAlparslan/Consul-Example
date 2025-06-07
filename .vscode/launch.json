@@ -8,27 +8,34 @@
             "name": "Compound",
             "stopAll": true,
             "configurations": [
-                "C#:ServiceA Debug",
-                "C#:ServiceB Debug",
-                "C#:ServiceC Debug"
+                "Api Gateway",
+                "ServiceA",
+                "ServiceB",
+                "ServiceC"
             ]
         }
     ],
     "configurations": [
         {
-            "name": "C#:ServiceA Debug",
+            "name": "Api Gateway",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}/ConsulPlayGround/src/ApiGateway/ApiGateway.csproj"
+        },
+        {
+            "name": "ServiceA",
             "type": "dotnet",
             "request": "launch",
             "projectPath": "${workspaceFolder}/ConsulPlayGround/src/ServiceA/ServiceA.csproj"
         },
         {
-            "name": "C#:ServiceB Debug",
+            "name": "ServiceB",
             "type": "dotnet",
             "request": "launch",
             "projectPath": "${workspaceFolder}/ConsulPlayGround/src/ServiceB/ServiceB.csproj"
         },
         {
-            "name": "C#:ServiceC Debug",
+            "name": "ServiceC",
             "type": "dotnet",
             "request": "launch",
             "projectPath": "${workspaceFolder}/ConsulPlayGround/src/ServiceC/ServiceC.csproj"

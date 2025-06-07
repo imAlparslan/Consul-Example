@@ -12,7 +12,22 @@ services:
       retries: 10
     networks: 
      - consul-network
-   
+
+  api-gateway:
+    build:
+      context: ./src/ApiGateway
+    container_name: api-gateway
+    environment:
+      - DOTNET_ENVIRONMENT=Docker
+    ports:
+      - "4000:5274"
+    depends_on:
+        consul:
+            condition: service_healthy
+    networks: 
+     - consul-network
+
+
   service-a1:
     build:
       context: ./src/serviceA
